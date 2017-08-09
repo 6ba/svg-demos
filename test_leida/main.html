@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>round</title>
+
+    <style type="text/css">
+        .round {
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    margin: 50px auto;
+}
+.w300 {
+    border-radius: 298px;
+    height: 298px;
+    margin-top: 0;
+    overflow: hidden;
+    width: 298px;
+}
+.w200 {
+    border-radius: 200px;
+    height: 200px;
+    width: 200px;
+}
+.w100 {
+    border-radius: 100px;
+    height: 100px;
+    width: 100px;
+}
+.w1 {
+    background-color: #fff;
+    border-radius: 1px;
+    height: 1px;
+    position: relative;
+    top: -4px;
+    width: 1px;
+}
+.line {
+    background: rgba(0, 0, 0, 0)  -webkit-gradient(linear,center top,center bottom,from(rgba(255, 255, 255, 0.3)), to(rgba(255, 255, 255, 0))) scroll 0 0;
+    border-left: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 0 0 150px;
+    height: 150px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transform: rotate(0deg);
+    transform-origin: 0 0 0;
+    width: 150px;
+}
+
+.roundMove {
+    animation: 3s linear 0s normal both infinite running round;
+}
+
+@keyframes round {
+100% {
+    transform: rotate(360deg);
+    }
+}
+
+  </style>
+
+
+</head>
+
+<body style="background: rgb(0,10, 0) none repeat scroll 0% 0%; margin: 0px;">
+  <div class="round w300">
+        <div class="round w200">
+            <div class="round w100">
+                <div class="round w1">
+                    <div class="line roundMove"></div>
+
+                    <circle cx="100" cy="0" r="10" stroke="blue" stroke-width="1" fill="red"></circle>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

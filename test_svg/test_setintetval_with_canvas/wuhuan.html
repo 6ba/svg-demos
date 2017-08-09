@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    button {
+      position: absolute;
+      top: 10px;
+      right: 5px;
+    }
+    path {
+      fill: transparent;
+      stroke-width: 12;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .blue {
+      stroke: #0885C2;
+    }
+    .black {
+      stroke: #292B2A;
+    }
+    .red {
+      stroke: #ED334C;
+    }
+    .yellow {
+      stroke: #FBB132;
+    }
+    .green {
+      stroke: #1C8b3C
+    }
+</style>
+
+<body>
+    <button onclick="rerun();">Again!</button>
+    <svg id="mySvg"  version="1.1" viewBox="0 0 550 300">
+    <path id="i0" class="blue"  d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0 "/>
+    <path id="i1" class="green" d="M 365, 175 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"/>
+    <path id="i2" class="black" d="M 275, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0 "/>
+    <path id="i3" class="red" d="M 450, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"/>
+    <path id="i4" class="yellow" d="M 187.5, 175 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"/>
+    </svg>
+</body>
+
+<script>
+        var current_frame, total_frames, path, length, handle, myobj;
+    var mysvg=document.getElementById('mySvg');
+    var init = function() {
+      current_frame = 0;
+      total_frames = 60;
+      path = new Array();
+      length = new Array();
+      for(var i=0; i<5;i++){
+        path[i] = document.getElementById('i'+i);
+        l = path[i].getTotalLength();
+        length[i] = l;
+        path[i].style.strokeDasharray = l + ' ' + l;
+        path[i].style.strokeDashoffset = l;
+      }
+      handle = 0;
+    }
+
+    var draw = function() {
+       var progress = current_frame/total_frames;
+       if (progress > 1) {
+         window.cancelAnimationFrame(handle);
+       } else {
+         current_frame++;
+         for(var j=0; j<path.length;j++){
+             path[j].style.strokeDashoffset = Math.floor(length[j] * (1 - progress));
+         }
+         handle = window.requestAnimationFrame(draw);
+       }
+    };
+
+    init();
+    draw();
+
+    var rerun = function() {
+      var old = document.getElementById('mySvg');
+      old.parentNode.removeChild(old);
+      document.getElementsByTagName('body')[0].appendChild(mysvg);
+      init();
+      draw();
+    };
+
+
+</script>
+</html>

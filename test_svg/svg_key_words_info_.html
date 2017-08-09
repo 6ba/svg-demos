@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<svg width="320" height="100" xmlns="http://www.w3.org/2000/svg">
+    <text font-size="60" y="60" x="160">马
+        <animate attributeName="x" dur="5s" values="0; 20; 160" calcMode="paced"/>
+    </text>
+</svg>
+<svg width="320" height="100" xmlns="http://www.w3.org/2000/svg">
+    <text font-size="60" y="60" x="160">马
+        <animate attributeName="x" dur="5s" values="0; 80; 160" keyTimes="0; .8; 1" calcMode="linear"/>
+    </text>
+</svg>
+<svg width="320" height="100" xmlns="http://www.w3.org/2000/svg">
+    <text font-size="60" y="60" x="160">马
+        <animate attributeName="x" dur="5s" values="0; 80; 160" keyTimes="0; .8; 1" calcMode="spline"  keySplines=".5 0 .5 1; 0 0 1 1" />
+    </text>
+    <!--
+    6. calcMode, keyTimes, keySplines
+这几个参数是控制动画先快还是先慢类似这样作用的。
+
+calcMode属性支持4个值：discrete | linear | paced | spline. 中文意思分别是：“离散”|“线性”|“踏步”|“样条”。
+
+discrete
+    from值直接跳到to值。
+linear
+    animateMotion元素以外元素的calcMode默认值。动画从头到尾的速率都是一致的。
+paced
+    通过插值让动画的变化步调平稳均匀。仅支持线性数值区域内的值，这样点之间“距离”的概念才能被计算（如position, width, height等）。如果”paced“指定，任何keyTimes或keySplines值都会打酱油。
+spline
+    插值定义贝塞尔曲线。spline点的定义在keyTimes属性中，每个时间间隔控制点由keySplines定义。
+
+keyTimes = “<list>”
+跟上面提到的<list>类似，都是分号分隔一组值。keyTimes总名字上看是关键时间点的意思，大致就是这个意思。前面提到过values也是多值，这里有一些约定的规则：首先，keyTimes值的数目要和values一致，如果是from/to/by动画，keyTimes就必须有两个值。然后对于linear和spline动画，第一个数字要是0, 最后一个是1。 最后，每个连续的时间值必须比它前面的值大或者相等。
+
+paced模式下，keyTimes会被忽略；keyTimes定义错误，也会被忽略；dur为indefinite也会被忽略。
+
+keySplines = “<list>”
+keySplines表示的是与keyTimes相关联的一组贝塞尔控制点（默认0 0 1 1）。每个控制点使用4个浮点值表示：x1 y1 x2 y2. 只有模式是spline时候这个参数才有用，也是分号分隔，值范围0~1，总是比keyTimes少一个值。
+
+如果keySplines值不合法或个数不对，是没有动画效果的。
+http://www.zhangxinxu.com/wordpress/2014/08/so-powerful-svg-smil-animation/
+    -->
+</svg>
+</body>
+</html>

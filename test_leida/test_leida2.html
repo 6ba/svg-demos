@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<canvas id="canvas1" width="400" height="300"></canvas>
+
+    <script>
+    //MyCtx是我写的一个通用的类，我自己写些小小的canvas js都用这个当先锋。
+    //把canvas 2d context的一些常用方法封装了一下，以便像jQuery那样作链式调用。
+    //对于最常用的绘制路径的指令，采用了字母缩写。习惯了svg的简洁，也搬迁到canvas来。
+    function MyCtx(ctx){
+        this.ctx = ctx;
+    }
+    (function (map){
+        for(var k in map){
+            MyCtx.prototype[k] = new Function('this.ctx.'+map[k]+'.apply(this.ctx,arguments); return this;');
+        }
+    }({
+        B:'beginPath', M:'moveTo', L:'lineTo', A:'arc', Z:'closePath', f:'fill', dI:'drawImage', cR:'clearRect', clip:'clip', save:'save', restore:'restore'
+    }));
+    function init(){
+        var ctx = document.getElementById("canvas1").getContext('2d');
+        var mtx = new MyCtx(ctx), i=-1;
+        function f(){
+            //链式调用绘图指令，绘制一个扇形，扇形的角度随时间逐渐变化，这是实现动画效果的关键。
+            mtx.save().dI(img,0,0).B().A(200,150,250,Math.abs(++i%100)*Math.PI/50,Math.PI*2,(i/100|0)%2).L(200,150).Z().clip().dI(img,-400,0).restore();
+            setTimeout(f,60);
+        }
+        f();
+    }
+    var img = new Image();
+    img.src = 'seo.png';
+    img.onload = init;
+    </script>
+</body>
+</html>
