@@ -30,3 +30,5 @@ http://www.zhangxinxu.com/wordpress/2014/08/so-powerful-svg-smil-animation/
     css
         stroke-dasharray代表虚线之间的间距大小
         stroke-dashoffse代表虚线的偏移量
+> - ** SVG 稀疏特性**
+    http://www.cnblogs.com/coco1s/p/6225973.html

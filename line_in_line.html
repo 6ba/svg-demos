@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jQuery-2.1.4.min.js"></script>
+</head>
+<body>
+
+<svg width="360" height="400" xmlns="http://www.w3.org/2000/svg">
+
+    <line x1="0" y1="100" x2="200" y2="100" style="stroke:rgb(0,255,255);stroke-width:10" ></line>
+    <line  x1="0" y1="100" x2="20" y2="100" id="xx2" stroke="rgb(0,0,0)" stroke-width="10" ></line>
+<!--rgb(0,0,0)-->
+</svg>
+
+</body>
+
+<script type="text/javascript">
+    var xlable = 0; //初始xlable为0; 端点
+    console.log("run！");
+    window.setInterval(function () {
+            if(xlable != 200){
+                var x2 = xlable+20;
+                 $("#xx2").attr({x1: xlable, x2: x2,});
+                xlable += 20;
+            }else{
+               xlable = 0;
+            }
+        //console.log("????");
+    },100);
+</script>
+
+</html>
